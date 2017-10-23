@@ -1,0 +1,42 @@
+MIPS Notes:
+----------------------
+
+Every Assembly program (.asm) has two sections:
+	.data 					- Used to declare all variables that you are going to use in your program
+								<variable name>: <data type> <variable value>
+	.text 					- All the instructions that our program needs
+
+Variable types:
+	.ascii 					- Stores a string without the null terminator ("\n")
+	.byte 					- Single character. 8 bits
+	.word 					- 32 bits. Can also be an integer
+	.float 					- 
+	.double 				- 64 bits. Needs to registers to hold it. Always use even register numbers
+	
+Instructions:
+	li $v0, 4 				- Get ready to print something (load immediate)
+								4 - Ascii or byte
+								2 - Float
+								3 - Double
+								1 - Integer
+							
+	lw $v0, 1 				- Get ready to print a word (load word)
+								1 - Word
+		
+	la $a0, <varName> 		- Load <varName> from RAM to $a0 and print it
+	lwc1 $f12, <varName> 	- (load word coprocessor 1) ($f12 is in the coprocessor)
+	.ldc1 $f2, <varName> 	- This will store <varName> in $f2 and $f3 (load double coprocessor 1)
+	syscall 				- Do it
+	add.d $f12, $f2, $f0 	- Add the doubles in $f2 and $f0 together and put it in $f12
+	add $t2, $t0, $t1 		- $t2 = $t0 + $t1
+	add $a0, $zero, $t2 	- Add zero to $t2 and put it in $a0. Essentially moving $t2 to $a0. Can also be written as...
+	move $a0, $t2 			- Move contents of $t2 to $a0
+	addi $s0, $zero, <num> 	- Add a number to contents of a register and put it in $s0 (Add immediate)
+	mul $t0, $s0, $s1		- $t0 = $s0 * $s1. Max size of $s0 and $s1 is 16 bits. Any bigger and it'll be over 32 bits (Max size of a register)
+	mult $t0, $t1			- Multiplication of bigger numbers. Stored in the lo and hi registers.
+	mflo $s0				- Move contents from lo to $s0
+	
+Special:
+	Whenever you print to the screen, you have to have the thing you're going to print in $a0
+	
+--------- Notes through video 11 ---------
